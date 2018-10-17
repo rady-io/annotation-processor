@@ -1,0 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/rady-io/annotation-processor/badge.svg)](https://coveralls.io/github/rady-io/annotation-processor)
+[![Go Report Card](https://goreportcard.com/badge/github.com/rady-io/annotation-processor)](https://goreportcard.com/report/github.com/rady-io/annotation-processor)
+[![Build Status](https://travis-ci.org/rady-io/annotation-processor.svg?branch=master)](https://travis-ci.org/rady-io/annotation-processor)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/rady-io/annotation-processor/blob/master/LICENSE)
+[![Documentation](https://godoc.org/github.com/rady-io/annotation-processor?status.svg)](https://godoc.org/github.com/rady-io/annotation-processor)

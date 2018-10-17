@@ -1,0 +1,29 @@
+language: go # 声明构建语言环境
+sudo: false # 开启基于容器的Travis CI任务，让编译效率更高。
+
+notifications: # 每次构建的时候是否通知，如果不想收到通知，那就设置false吧(email: false)
+  email:
+    recipients:
+    - tech@rady.io
+  on_success: change
+  on_failure: always
+
+go:
+- "1.11"
+
+install:
+- go build
+- go get github.com/mattn/goveralls
+
+
+script: # 集成脚本
+- go test -bench=.
+- go test -v -cover -coverprofile=go.coverprofile
+- goveralls -coverprofile=go.coverprofile -service=travis-ci -repotoken=$COVERALLS_TOKEN
+
+after_success:
+- bash <(curl -s https://codecov.io/bash)
+
+env: #env环境变量设置，travis提供的repo_token安全方式
+  global:
+    secure: "WOB8AgzbIGr5QbUFWZJnDrSKMkEVvI0X8+QcnQyOUQjFITBkKTNbCRcq7yPkNUFYRmtlgQQKHA+eoAXS26NrdJxzZDdMRSO+q7mGtL21qOthtQxC0+cIPpEvXcjatv4lpwR47CdUzU3Xx9wIwcLokgqhRXMpteIPzDyGjObIymoom0D7FtaWmQYPkuqL8PfwD8aePEUNPCccsS0KD+IFqrBt6RD8zCmDiBE+vAnyynM35AO0/zjPIWxVGKoQhpd5C/4OGBC7jiGe0IwV6nXVc1kEGMO8dYbLgszcAZmmTHAmMW/SqCcv+SvHgQMzxhYQRRpPeHmLe7JYnTPA9znPoXrUT8uClbx6cXFwYj8l6MZbfe4ue/WrEwOJqCRt7beASV2RCGGe0NqfdIE62Y5WaxPUf9mz6W1LixJ16bgXBHyDge/RlaPygSQpyK4uWCnitFaFfuQuJNxyxl85WMEn8Y6bCX3a7/7LSYkTHK30BnN9fTOL3KzQQ59FULa3bjf+uHWxvkob5E+pQzqzPURPgbiLiAw2AdVQ1g6g3whL8jaG04AQEkaB7s4RWcLbL8d1MrMOa1JAKEOQ6PmsWe/rWknweAGgH6m6oeeMDL1XzfS5vih/MXCQ7o76wLF2jQXfSbMhipbNmSun4uQRb3c0rhSKRqPP0j9b/PYkxuTCHmU="
